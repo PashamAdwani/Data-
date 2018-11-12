@@ -1,5 +1,9 @@
 import pandas as pd
+import json
 
-df.to_json(orient='index')
-dt=pd.read_json('D:\Data Analysis\Project2\Project2\train.json',orient='split')
+with open(r'D:\Data Analysis\Project2\Project2\Data-Analysis-Project2\train.json') as data_file:
+    data_loaded = json.load(data_file)
+
+print(data_loaded)
+    
 
