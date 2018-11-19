@@ -5,7 +5,7 @@ import json
 import scipy as sc
 import numpy as np
 from keras.models import Sequential
-from keras.layers import Dense
+from keras.layers import Dense,Flatten
 
 train_file=pd.read_json(r'D:\Data Analysis\Project2\Project2\Data-Analysis-Project2\train.json', orient='records')
 test_file=pd.read_json(r'D:\Data Analysis\Project2\Project2\Data-Analysis-Project2\test.json', orient='records')    
@@ -66,9 +66,11 @@ for i in test_input:
 print("Over")
 
 
+inpshape=(6714,)
 
 classifier=Sequential()
-classifier.add(Dense(64,input_shape(6714,),activation='relu'))
+model.add(Flatten(input_shape=inpshape))
+classifier.add(Dense(32,input_shape=inpshape,activation='relu'))
 classifier.compile(loss='binary_crossentropy',optimizer='adam', metrics=['accuracy'])
 classifier.fit(train[0:39774,:],train_output)
 classifier.predict(test)
