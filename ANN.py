@@ -4,6 +4,8 @@ import numpy as np
 import json
 import scipy as sc
 import numpy as np
+impoert keras
+from keras.utils import to_categorical
 from keras.models import Sequential
 from keras.layers import Dense,Flatten
 
@@ -65,12 +67,16 @@ for i in test_input:
 
 print("Over")
 
+y_labels=np.zeros((39774,1))
+map_to_int={ele:cnt for cnt,ele in enumerate(train_output.unique())}
+y_labels=train_output.replace(map_to_int)     
+        
 
 inpshape=(6714,)
-
-classifier=Sequential()
-model.add(Flatten(input_shape=inpshape))
-classifier.add(Dense(32,input_shape=inpshape,activation='relu'))
-classifier.compile(loss='binary_crossentropy',optimizer='adam', metrics=['accuracy'])
-classifier.fit(train[0:39774,:],train_output)
-classifier.predict(test)
+y_labels1=keras.utils.to_categorical(y_labels, num_classes=20)
+classifier7=Sequential()
+classifier7.add(Dense(64,input_shape=inpshape,activation='relu'))
+classifier7.add(Dense(32,input_shape=inpshape,activation='relu'))
+classifier7.compile(loss='sparse_categorical_crossentropy',optimizer='adam', metrics=['accuracy'])
+classifier7.fit(train[0:39774,:],y_labels)
+classifier7.predict(test)
