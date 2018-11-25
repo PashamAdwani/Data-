@@ -53,7 +53,7 @@ print("It will take time")
 x=0
 y=0
 
-for i in train_input:
+for i in train_input[0:39774]:
     for j in i:
         y=0
         for k in element:
@@ -69,7 +69,7 @@ workbook_train=xs.Workbook('D:\Data Analysis\Project2\Project2\Data-Analysis-Pro
 worksheet_train=workbook_train.add_worksheet()
 i=0
 j=0
-for i in range(9944):
+for i in range(39774):
     print(i)
     for j in range(6714):
         worksheet_train.write(i,j,train[i,j])
@@ -102,11 +102,3 @@ for i in range(9944):
     for j in range(6714):
         worksheet_test.write(i,j,test[i,j])
 workbook_test.close()
-
-
-
-
-y_labels=np.zeros((39774,1))
-map_to_int={ele:cnt for cnt,ele in enumerate(train_output.unique())}
-y_labels=train_output.replace(map_to_int)     
-test_labels=test_output.replace(map_to_int)        
