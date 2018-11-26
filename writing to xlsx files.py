@@ -16,13 +16,13 @@ from keras.utils import to_categorical
 from keras.models import Sequential
 from keras.layers import Dense,Flatten
 import xlsxwriter as xs
+
+
 train_file=pd.read_json(r'D:\Data Analysis\Project2\Project2\Data-Analysis-Project2\train.json', orient='records')
 test_file=pd.read_json(r'D:\Data Analysis\Project2\Project2\Data-Analysis-Project2\test.json', orient='records')    
 test_output=pd.read_csv(r'D:\Data Analysis\Project2\Project2\Data-Analysis-Project2\sample_solution.csv',header=0)
 ##================
 #Features
-##================
-
 ##================
 test_labels=test_output['cuisine']
 train_input=train_file['ingredients']
@@ -59,7 +59,8 @@ for i in train_input[0:39774]:
         for k in element:
             if(j==k):
                 train[x,y]=1
-            y=y+1
+        y=y+1 
+    if(x<=39773):   
         x=x+1
 print("over")
 
@@ -70,7 +71,6 @@ worksheet_train=workbook_train.add_worksheet()
 i=0
 j=0
 for i in range(39774):
-    print(i)
     for j in range(6714):
         worksheet_train.write(i,j,train[i,j])
 workbook_train.close()
@@ -80,16 +80,16 @@ print("It will take time")
 x=0
 y=0
 
-for i in test_input:
+for i in test_input[0:9944]:
     for j in i:
         y=0
         for k in element:
             if(j==k):
                 test[x,y]=1
-            y=y+1
+        y=y+1 
+    if(x<=9943):   
         x=x+1
-
-print("Over")
+print("over")
 
 ##==============Writing  Test File
 i=0
