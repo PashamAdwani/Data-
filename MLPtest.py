@@ -26,6 +26,7 @@ al=[0.0001,0.0005]
 bs=[64,128]
 lr=['constant','invscaling','adaptive']
 best_params = [0,0,0,0,0,0]
+params = [0,0,0,0,0,0]
 for h in hl:
     for a in act:
         for s in sol:
@@ -41,5 +42,15 @@ for h in hl:
                         for i in ypred:
                             if(i==test_label[x]):
                                 score=score+1
-                        print('Accuracy:',score/10)
+                        accuracy=score/10
+                        params=[h,a,s,a1,b,l]
+                        print("=========")
+                        print('Accuracy:',accuracy)
+                        print('Params:',params)
+                        print("=========")
+                        if(best<=accuracy):
+                            best=accuracy
+                            best_params=[h,a,s,a1,b,l]
 
+print('Best Parameters:',best_params)
+print('Best Accuracy:',best)
