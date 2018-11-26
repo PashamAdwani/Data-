@@ -67,6 +67,7 @@ worksheet_train=workbook_train.add_worksheet()
 i=0
 j=0
 for i in range(4000):
+    print(i)
     for j in range(6714):
         worksheet_train.write(i,j,train[i,j])
 workbook_train.close()
