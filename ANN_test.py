@@ -25,11 +25,11 @@ train_inp=pd.read_excel(r'D:\Data Analysis\Project2\Project2\Data-Analysis-Proje
 test_inp=pd.read_excel(r'D:\Data Analysis\Project2\Project2\Data-Analysis-Project2\Test_Input.xlsx',index_col=None,header=None)
 train_l=train_file['cuisine']
 test_l=test_file['cuisine']
-train_label=train_l[0:39774]
+train_label=train_l[0:10000]
 test_label=test_l[0:9944]
 
 inpshape=(6714,)
-y_labels=np.zeros((39774,1))
+y_labels=np.zeros((10000,1))
 map_to_int={ele:cnt for cnt,ele in enumerate(train_label.unique())}
 y_labels=train_label.replace(map_to_int)  
 y_test=np.zeros((9944,1))
@@ -48,7 +48,7 @@ print('Writing to the xlsx training file')
 workbook_train=xs.Workbook('D:\Data Analysis\Project2\Project2\Data-Analysis-Project2\Test_Output.xlsx')
 worksheet_train=workbook_train.add_worksheet()
 for i in range(9944):
-    worksheet_train.write(1,j,z(i))
+    worksheet_train.write(1,i,z(i))
 workbook_train.close()
 
 
@@ -66,7 +66,7 @@ plt.plot(xc,train_loss)
 
 plt.xlabel('num of Epochs')
 plt.ylabel('loss')
-plt.title('train_loss)
+plt.title('train_loss')
 plt.grid(True)
 plt.legend(['train'])
 #print plt.style.available # use bmh, classic,ggplot for big pictures
